@@ -4,10 +4,13 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 
 import server.UserDataThread;
-import server.interfaces.ManagerObjectInterface;
+import server.interfaces.ObjectManagerInterface;
 import server.interfaces.RestOperationInterface;
 import server.logic.User;
 
+/*
+ * VERSIÓN DE Santiago Rodenas Herráiz, para PSP 22-23
+ */
 public class Register implements RestOperationInterface{
 
    
@@ -20,7 +23,7 @@ public class Register implements RestOperationInterface{
      */
 
     @Override
-    public boolean execute(PrintWriter pw, String[] args, ManagerObjectInterface manager, Thread context) {
+    public boolean execute(PrintWriter pw, String[] args, ObjectManagerInterface manager, Thread context) {
         /*
         Deberá comprar si existe ese usuario y en caso negativo, insertarlo.
         Debe comprobar que el número de argumentos sea al menos:
@@ -33,6 +36,9 @@ public class Register implements RestOperationInterface{
             return false;
         }
 
+        /*
+         * Verificamos si el usuario ya esta registrado comparando su email.
+         */
         User u = (User)manager
                 .FindByEmail(args[1]);  //Buscamos por email
 
@@ -44,6 +50,9 @@ public class Register implements RestOperationInterface{
 
         manager.Add(new User(args));  //registramos el usuario   
 
+        /*
+         * Debemos de añadir su fichero con sus datos. 
+         */
         try{
             FileWriter userFile = new FileWriter("files/" + args[0]+".dat"); 
             PrintWriter pwf = new PrintWriter(userFile);

@@ -4,13 +4,23 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import server.interfaces.ManagerObjectInterface;
-import server.logic.User;
+import server.interfaces.ObjectManagerInterface;
 import server.logic.UserManager;
-import server.rest.OperationsManager;
+import server.rest.RestOperationsManager;
+
+/*
+ * VERSIÓN DE Santiago Rodenas Herráiz, para PSP 22-23
+ * 
+ * Creará un hilo por petición de cliente.
+ * Existirá un único objeto que compartirán todos los hilos, que será el administrador
+ * de operaciones Rest. Dicho objeto, creará el recurso compartido que son la lista de
+ * Usuarios y sus operaciones. 
+ */
+
 
 public class UserServer {
-    private static OperationsManager operationManager;  //Gestor de operaciones.
+    //Sólo tendremos un único objeto admnistrador de operaciones Rest. 
+    private static RestOperationsManager restOperationsManager;  //Gestor de operaciones.
     public static void main(String[] args) {
 
         if (args.length == 0) {
@@ -21,10 +31,10 @@ public class UserServer {
         final int port = Integer.parseInt(args[0]);
 
         //Recurso Compartido de los hilos. Trabaja directamente con la lista de Usuarios.
-        final ManagerObjectInterface userManager = new UserManager<User>(); 
+        final ObjectManagerInterface userManager; 
 
-        //Gestor operaciones Rest
-        operationManager = new OperationsManager(userManager );  
+        //Gestor operaciones Rest. Este objeto es el principal y creará el recurso compartido.
+        restOperationsManager = new RestOperationsManager(new UserManager<>());  
 
         System.out.println("Servidor a la escucha del puerto  " + port);
         System.out.println("Esperando conexión ......");
@@ -38,7 +48,8 @@ public class UserServer {
                     socketClient.getPort()
                 );
     
-                new UserDataThread(socketClient,  operationManager).start();
+                //Creamos el hilo pasándole el administrador de servicios Rest
+                new UserDataThread(socketClient,  restOperationsManager).start();
             }
         } catch (IOException e) {
              e.printStackTrace();

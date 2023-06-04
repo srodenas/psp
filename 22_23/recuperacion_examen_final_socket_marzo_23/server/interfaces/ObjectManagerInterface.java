@@ -14,7 +14,7 @@ import java.util.List;
  * QUE QUEDE CLARO, QUE ESTA INTERFAZ INDEPENDIZA DEL OBJETO A TRATAR. PARA ELLO, UTILIZAMOS
  * LOS GENÉRICOS
  */
-public interface ManagerObjectInterface<T> {
+public interface ObjectManagerInterface<T> {
 
    //Inserta un objeto genérico
    public void  Add(T o);      

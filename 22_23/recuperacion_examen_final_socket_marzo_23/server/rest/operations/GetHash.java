@@ -8,9 +8,14 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 import server.UserDataThread;
-import server.interfaces.ManagerObjectInterface;
+import server.interfaces.ObjectManagerInterface;
 import server.interfaces.RestOperationInterface;
-
+/*
+ * VERSIÓN DE Santiago Rodenas Herráiz, para PSP 22-23
+ * 
+ * Esta clase, crea un proceso que devolverá el hash de un fichero
+ * previamente existente.
+ */
 public class GetHash implements RestOperationInterface{
 
     /*
@@ -18,7 +23,7 @@ public class GetHash implements RestOperationInterface{
      *  @return boolean true (correcto), false(no correcto)
      */
     @Override
-    public boolean execute(PrintWriter pw, String[] args, ManagerObjectInterface manager, Thread context) {
+    public boolean execute(PrintWriter pw, String[] args, ObjectManagerInterface manager, Thread context) {
 
         // CertUtil -hashfile file.ext MD5
         if (args.length < 1){
@@ -26,6 +31,11 @@ public class GetHash implements RestOperationInterface{
             pw.flush();
             return false;
         }
+
+        /*
+         * Este servicio, sólo se puede invocar si el usuario está logueado
+         * Esto lo controlamos mediante el contexto.
+         */
         if (!((UserDataThread)context).isLogged()){
             pw.println("Acción no permitidq. Debes estar registrado!!");
             pw.flush();
@@ -35,6 +45,11 @@ public class GetHash implements RestOperationInterface{
         final String  path="files/";  
         File file = new File(path + args[0] + ".dat");
         final String absolutePathFile = file.getAbsolutePath();
+
+        /*
+         * Si el fichero existe y no es un Directorio, ejecuta el comando
+         * que devuelve el hash de ese fichero.
+         */
         if (file.exists() && !file.isDirectory()){
             final String [] cmd = {"CertUtil", "-hashfile", absolutePathFile, "MD5"};
            

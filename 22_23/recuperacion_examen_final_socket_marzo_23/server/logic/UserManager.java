@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import server.interfaces.ManagerObjectInterface;
+import server.interfaces.ObjectManagerInterface;
 /*
  * *VERSIÓN DE Santiago Rodenas Herráiz, para PSP 22-23
  * 
@@ -13,7 +13,7 @@ import server.interfaces.ManagerObjectInterface;
  */
 
 
-public class UserManager<T> implements ManagerObjectInterface<T>{
+public class UserManager<T> implements ObjectManagerInterface<T>{
 
     // Necesitamos una clave para el User
     private AtomicInteger automaticId;

@@ -3,10 +3,13 @@ package server.rest.operations;
 import java.io.PrintWriter;
 
 import server.UserDataThread;
-import server.interfaces.ManagerObjectInterface;
+import server.interfaces.ObjectManagerInterface;
 import server.interfaces.RestOperationInterface;
 import server.logic.User;
 
+/*
+ * VERSIÓN DE Santiago Rodenas Herráiz, para PSP 22-23
+ */
 public class Login implements RestOperationInterface{
    
     /*
@@ -14,7 +17,7 @@ public class Login implements RestOperationInterface{
      *  @return boolean true (correcto), false(no correcto)
      */
     @Override
-    public boolean execute(PrintWriter pw, String[] args, ManagerObjectInterface manager,  Thread context) {
+    public boolean execute(PrintWriter pw, String[] args, ObjectManagerInterface manager,  Thread context) {
 
         if (args.length < 2){
             pw.println("Debes pasar el email y passw");

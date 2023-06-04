@@ -6,19 +6,25 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Scanner;
 
-import server.interfaces.ManagerObjectInterface;
-import server.rest.OperationsManager;
+import server.rest.RestOperationsManager;
 
+/*
+ * VERSIÓN DE Santiago Rodenas Herráiz, para PSP 22-23
+ * 
+ * El hilo se encargará de invocar a los servicios que pida el cliente.
+ * Al crearse el hilo, se le pasa el recurso compartido a partir de Administrador
+ * de operaciones Rest. Recordamos que dicho objeto, TIENE ACCESO AL RECURSO COMPARTIDO UserManager.
+ */
 public class UserDataThread extends Thread{
 
     private Socket socket;
     private PrintWriter pw;
     private Scanner sc;
-    private OperationsManager operationManager;
+    private RestOperationsManager operationManager;
     private boolean logged  = false;
     private boolean exit = false;
 
-    public UserDataThread (Socket socket, OperationsManager operManager){
+    public UserDataThread (Socket socket, RestOperationsManager operManager){
         this.socket = socket;
         this.operationManager = operManager;
     }
@@ -30,6 +36,7 @@ public class UserDataThread extends Thread{
             pw = new PrintWriter(this.socket.getOutputStream());
             sc = new Scanner(this.socket.getInputStream());
             System.out.println("Esperando respuesta cliente");
+
             while (this.sc.hasNextLine()) {
               String line = this.sc.nextLine();
               InetAddress address = this.socket.getInetAddress();

@@ -1,23 +1,20 @@
-import java.io.BufferedOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.List;
 
-import server.interfaces.ManagerObjectInterface;
+import server.interfaces.ObjectManagerInterface;
 import server.logic.User;
 import server.logic.UserManager;
-import server.rest.OperationsManager;
+import server.rest.RestOperationsManager;
+
 
 public class Test {
-    static ManagerObjectInterface userManager;
-    static OperationsManager operationManager;
+    static ObjectManagerInterface userManager;
+    static RestOperationsManager operationManager;
     static final PrintWriter writer = new PrintWriter(System.out);
    
     public static void main(String[] args) {
         userManager = new UserManager();
-        operationManager = new OperationsManager(userManager); 
+        operationManager = new RestOperationsManager(userManager); 
         insertTest();
         printAllTest();     //imprime todos los usuarios.
         registerTest();     //registra un nuevo usuario

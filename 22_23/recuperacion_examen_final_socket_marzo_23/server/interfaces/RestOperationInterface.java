@@ -49,5 +49,5 @@ public interface RestOperationInterface {
      *  @return boolean true (correcto), false(no correcto)
      * 
      */
-    public boolean execute(PrintWriter pw, String [] args, ManagerObjectInterface manager, Thread context);
+    public boolean execute(PrintWriter pw, String [] args, ObjectManagerInterface manager, Thread context);
 }
