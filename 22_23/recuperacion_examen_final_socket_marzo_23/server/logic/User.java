@@ -1,6 +1,8 @@
 package server.logic;
-import java.util.concurrent.atomic.AtomicLong;
 
+/*
+ * Nuestra clase POJO.
+ */
 public class User {
     private int id;  //Clave principal
     private String name;

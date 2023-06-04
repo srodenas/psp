@@ -9,6 +9,11 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
+/*
+ * VERSIÓN DE Santiago Rodenas Herráiz, para PSP 22-23
+ * Cliente que solicita servicios a una servidor.
+ * launch.json  --> localhost, 3000
+ */
 public class UserClient {
     public static Socket socket;
     public static void main(String[] args) {
@@ -43,21 +48,22 @@ public class UserClient {
 
             //String para recoger la respuesta que le manda el servidor.
             String response;
-            // use old-way to read from server without blocking the thread
             
             do{
                 System.out.print(cmd + " ");
 
-                //llemos la línea desde la shell.
+                //leemos la línea desde la shell.
                 line = input.nextLine();
 
                 //la mandamos al servidor por medio de su flujo de salida.
                 pw.println(line);  
+
+                //limpiamos el buffer para que se haga efectivo.
                 pw.flush();
 
                 //comprobamos si el cliente quiere salir.
                 if (line.equals("fin")){
-                    exit=true;  //no esperamos respuesta del servidor.
+                    exit=true;  //no esperamos respuesta del servidor. Cerramos todo lo que no está escrito.
                     socket.close();
                     pw.close();
                     input.close();

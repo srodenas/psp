@@ -13,7 +13,25 @@ import server.rest.operations.Register;
 import server.rest.operations.UserData;
 import server.rest.operations.UsersList;
 
-/*  CLASE GESTOR DE OPERACIONES REST
+
+/*
+ *  VERSIÓN DE Santiago Rodenas Herráiz, para PSP 22-23
+ * 
+ * CLASE GESTOR DE OPERACIONES REST
+ * 'Esta clase es la gestora de todas las operaciones rest. Contendrá cada uno de
+ * los objetos que represente una de las operaciones REST.'
+ * Se encargará de llamar a las diferentes operaciones mediante objetos que implementen el
+ * servicio a emular.
+ * 
+ * Los objetos de operaciones Rest, los contiene dentro de un HashMap, cuya clave será el Verbo.
+ * 
+ * Esta clase, contiene un único método llamado execute, que se encargará de seleccionar el objeto
+ * que emulará el servicio dependiendo del verbo. Para ello, necesi
+ */
+/*
+  
+* 
+
 
  * - Esta clase, se encarga de llamar a las diferentes
  * operaciones, dependiendo del verbo y pasándole los

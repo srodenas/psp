@@ -4,12 +4,25 @@ import java.io.PrintWriter;
 
 
 /*
-    - Estos son los métodos que pretendemos emular a partir
-    de clases que implementen el método execute.
-    - El gestor que lleve a cabo las operaciones rest, deberá implementar
-    clases que sobreescriban el método execute.
-    - La idea es hacer clases que representen una operación rest. 
+ * VERSIÓN DE Santiago Rodenas Herráiz, para PSP 22-23
+ * 
+ * La idea es tener una Interfaz, que defina un método execute con los parámetros siguiente:
+ * 
+ * PrintWriter pw (Flujo de salida para el intercambio de datos) con el cliente.
+ * String[] args (comando que reciba del cliente). 
+ * ManagerObjectInterface manager (objeto que implemente las operaciones sobre la lista de genericos).
+ * Thread context (Hilo que atiende al cliente).
+ * 
+ * -------------
+ * Esta interfaz, recibe todo lo necesario para llamar al objeto que implemente la operación REST.
+ * Si quisiéramos implementar más operaciones REST, sólo necesitamos añadir una nueva clase que implemente de esta
+ * interfaz.
+ */
+/*
+
     
+    
+    *****OTRA OPCIÓN MÁS SENCILLA SERÍA HACER ESTO*********
     - Otra opción, habría sido la Interfaz con los métodos rest.
         //registrar un usuario. Almacena un fichero con sus datos.
     public boolean Register(PrintWriter pw, String [] args);
