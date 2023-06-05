@@ -58,7 +58,7 @@ public class UserManager<T> implements ObjectManagerInterface<T>{
      * A partir de un entero, devolvemos el User.
      * Es importante darse cuenta, que filtraremos por id, encontrando
      * la primera instancia que coincida y en caso de que no se encuentre, 
-     * devolver un null. Utilizamos una expresión lamda. El método debe
+     * devolver un null. Utilizamos una expresión lambda. El método debe
      * devolver un T, por tanto lo generalizamos a T.
      * Aseguramos la EXCLUSIÓN MÚTUA.
      */
@@ -93,7 +93,7 @@ public class UserManager<T> implements ObjectManagerInterface<T>{
 
     /*
      * Devolvemos un User, donde coincida su email.
-     * Utilizamos expresión lamda.
+     * Utilizamos expresión lambda.
      * Aseguramos la EXCLUSIÓN MÚTUA.
      */
     @Override
@@ -114,7 +114,7 @@ public class UserManager<T> implements ObjectManagerInterface<T>{
 
     /*
      * Lo mismo que el anterio método, sólo que añadimos una operación
-     * and en la expresión lampda
+     * and en la expresión lambda
      */
     @Override
     synchronized  public T FindByEmailAndPassw(String email, String pass) {

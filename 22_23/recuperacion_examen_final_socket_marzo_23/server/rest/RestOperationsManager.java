@@ -34,7 +34,7 @@ public class RestOperationsManager {
     
     private final HashMap<String, RestOperationInterface> operationsMap;  //Contendrá los objetos operacion a ejecutar.
 
-    private ObjectManagerInterface managerObject; //Recurso compartido por todos los hilos de ejecución.
+    private final ObjectManagerInterface managerObject; //Recurso compartido por todos los hilos de ejecución.
 
 
 
@@ -92,6 +92,8 @@ public class RestOperationsManager {
              * como los parámetros, el recurso compartido y el contexto de quien invoca el servicio.
              * Devolvemos true/false, dependiendo de si se ha obtenido un resultado OK.
              * Podríamos haberlo complicado algo más, con objetos de código 400 o de código 200.
+             * 
+             * Aplico polimorfismo.
              */
             return(operation.execute(pw, operationsArgs, getManagerObject(), context));
 

@@ -10,7 +10,8 @@ import java.io.PrintWriter;
  * 
  * PrintWriter pw (Flujo de salida para el intercambio de datos) con el cliente.
  * String[] args (comando que reciba del cliente). 
- * ManagerObjectInterface manager (objeto que implemente las operaciones sobre la lista de genericos).
+ * ObjectManagerInterface  (objeto que implemente las operaciones sobre la lista de genericos). 
+ * Será nuestro recurso compartido.
  * Thread context (Hilo que atiende al cliente).
  * 
  * -------------

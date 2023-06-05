@@ -1,6 +1,7 @@
 package server.logic;
 
 /*
+ * VERSIÓN DE Santiago Rodenas Herráiz, para PSP 22-23
  * Nuestra clase POJO.
  */
 public class User {

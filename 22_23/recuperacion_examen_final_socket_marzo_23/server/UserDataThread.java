@@ -17,22 +17,25 @@ import server.rest.RestOperationsManager;
  */
 public class UserDataThread extends Thread{
 
-    private Socket socket;
-    private PrintWriter pw;
-    private Scanner sc;
+    private Socket socket;  //socker que conecta con el cliente.
+    private PrintWriter pw; //Para salida de datos hacia el cliente
+    private Scanner sc;     //Para lectura de datos desde el cliente
     private RestOperationsManager operationManager;
-    private boolean logged  = false;
-    private boolean exit = false;
+    private boolean logged  = false;  //El hilo no está logueado.
+    private boolean exit = false;  //Para el estado de cierre de conexión
 
     public UserDataThread (Socket socket, RestOperationsManager operManager){
         this.socket = socket;
-        this.operationManager = operManager;
+        this.operationManager = operManager;  //gestor de operaciones Rest
     }
 
     @Override
     public void run() {
         try{
            
+            /*
+             * Creamos los flujos de E/S para conectar con Cliente.
+             */
             pw = new PrintWriter(this.socket.getOutputStream());
             sc = new Scanner(this.socket.getInputStream());
             System.out.println("Esperando respuesta cliente");
@@ -48,7 +51,7 @@ public class UserDataThread extends Thread{
                 socket.close();
                 pw.close();
                 sc.close();
-                System.exit(0);
+                System.exit(0);  //cerramos conexión sin errores.
               }
              
             }

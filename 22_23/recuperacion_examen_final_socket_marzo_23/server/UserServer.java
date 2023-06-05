@@ -21,17 +21,27 @@ import server.rest.RestOperationsManager;
 public class UserServer {
     //Sólo tendremos un único objeto admnistrador de operaciones Rest. 
     private static RestOperationsManager restOperationsManager;  //Gestor de operaciones.
+    int port;
     public static void main(String[] args) {
-
-        if (args.length == 0) {
-            System.out.println("Debes pasar el puerto a escuchar");
-            System.exit(1);
-        }
-
-        final int port = Integer.parseInt(args[0]);
-
+        int port = -1; 
         //Recurso Compartido de los hilos. Trabaja directamente con la lista de Usuarios.
         final ObjectManagerInterface userManager; 
+
+
+        //Probamos que se le pase un parámetro puerto.
+        if (args.length == 0) {
+            System.out.println("Debes pasar el puerto a escuchar");
+            System.exit(1);  //Cerramos conexión con errores.
+        }
+
+
+        //Comprobamos que el puerto sea un entero.
+        try{
+            port = Integer.parseInt(args[0]);
+        }catch(NumberFormatException e){
+            System.out.println("Error en el tipo puerto");
+            System.exit(2);  //Cerramos conexión con errores.
+        }
 
         //Gestor operaciones Rest. Este objeto es el principal y creará el recurso compartido.
         restOperationsManager = new RestOperationsManager(new UserManager<>());  
@@ -39,9 +49,11 @@ public class UserServer {
         System.out.println("Servidor a la escucha del puerto  " + port);
         System.out.println("Esperando conexión ......");
     
-    
+        //Creamos nuestro socket de servidor, para servir a clientes.
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             while (true) {
+
+                //Aceptamos conexión con cliente
                 Socket socketClient = serverSocket.accept();
                 System.out.printf("Establecida conexión con %s:%d%n",
                     socketClient.getInetAddress(),
