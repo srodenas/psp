@@ -2,6 +2,7 @@ package server.rest.operations;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.io.File;
 
 import server.UserDataThread;
 import server.interfaces.ObjectManagerInterface;
@@ -54,7 +55,13 @@ public class Register implements RestOperationInterface{
          * Debemos de añadir su fichero con sus datos. 
          */
         try{
-            FileWriter userFile = new FileWriter("files/" + args[0]+".dat"); 
+
+
+            final String  path="22_23/recuperacion_examen_final_socket_marzo_23/files/";  
+            File file = new File(path + args[0] + ".dat");
+            final String absolutePathFile = file.getAbsolutePath();
+            
+            FileWriter userFile = new FileWriter(absolutePathFile); 
             PrintWriter pwf = new PrintWriter(userFile);
             String info = "Nombre: " +
                 args[0] + ", Email: " +
@@ -64,6 +71,7 @@ public class Register implements RestOperationInterface{
             pwf.println("Datos del usuario " + info);  //escribimos la información en fichero
             pwf.close();
         }catch (Exception e){
+            e.printStackTrace();
             pw.println("Error al crear fichero del usuario en registro");
             pw.flush();
             return false;

@@ -42,7 +42,7 @@ public class GetHash implements RestOperationInterface{
             return false;
         }
 
-        final String  path="files/";  
+        final String path="22_23/recuperacion_examen_final_socket_marzo_23/files/";  
         File file = new File(path + args[0] + ".dat");
         final String absolutePathFile = file.getAbsolutePath();
 
